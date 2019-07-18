@@ -13,7 +13,7 @@ class LaravelCartServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // $this->loadRoutesFrom(__DIR__.'/routes.php');
+        $this->loadRoutesFrom(__DIR__.'/routes.php');
         // $this->loadViewsFrom(__DIR__.'/views', 'contact');
         // $this->publishes([
         //     __DIR__.'/views' => resource_path('views/vendor/contact'),
@@ -29,7 +29,7 @@ class LaravelCartServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // $this->app->make('Ricadesign\Contact\ContactController');
+        $this->app->make('Ricadesign\LaravelCart\CartController');
         // $this->mergeConfigFrom(
         //      __DIR__.'/config/contact.php', 'contact'
         //  );
