@@ -1,0 +1,13 @@
+{
+    "name": "ricadesign/laravel-cart",
+    "description": "Laravel shopping Cart",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Cristian Payet",
+            "email": "payet91@gmail.com"
+        }
+    ],
+    "require": {}
+}
