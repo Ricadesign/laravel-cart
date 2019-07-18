@@ -9,5 +9,17 @@
             "email": "payet91@gmail.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Ricadesign\\LaravelCart\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ricadesign\\LaravelCart\\LaravelCartServiceProvider"
+            ]
+        }
+    }
 }
