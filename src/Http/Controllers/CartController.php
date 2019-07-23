@@ -28,7 +28,16 @@ class CartController extends Controller
         ]);
         return 'Ok';
     }
-
+    public function update(Request $request)
+    {
+        Cart::update($request->id,[
+            'quantity' => [
+                'relative' => false,
+                'value' => $request->quantity
+            ]
+        ]);
+        return 'Ok';
+    }
     public function remove(Request $request)
     {
         Cart::remove([
