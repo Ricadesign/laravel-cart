@@ -10,8 +10,7 @@ class CartController extends Controller
 {
     public function index()
     {
-        dd(Cart::getContent());
-        return 'Hellow';
+        return Cart::getContent();
     }
 
     public function store(Request $request)
@@ -20,14 +19,13 @@ class CartController extends Controller
         $request->validate([
             'id' => 'required'
         ]);
-
         Cart::add([
             'id' => $request->id,
             'name' => $request->name,
             'price' => $request->price,
             'quantity' => $request->quantity,
-            'attributes' => array()
+            'attributes' => $request->input('attributes')
         ]);
-        return 'Store';
+        return 'Ok';
     }
 }
