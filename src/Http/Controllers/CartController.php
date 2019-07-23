@@ -28,4 +28,12 @@ class CartController extends Controller
         ]);
         return 'Ok';
     }
+
+    public function remove(Request $request)
+    {
+        Cart::remove([
+            'id' => $request->id
+        ]);
+        return 'Ok';
+    }
 }
