@@ -1,6 +1,6 @@
 {
   "name": "@ricadesign/vuex-cart",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Vuex cart that connects with laravel-cart",
   "main": "index.js",
   "scripts": {
