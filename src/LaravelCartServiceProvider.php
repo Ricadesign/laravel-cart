@@ -14,13 +14,10 @@ class LaravelCartServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadRoutesFrom(__DIR__.'/routes.php');
-        // $this->loadViewsFrom(__DIR__.'/views', 'contact');
-        // $this->publishes([
-        //     __DIR__.'/views' => resource_path('views/vendor/contact'),
-        // ]);
-        // $this->publishes([
-        //     __DIR__.'/config/contact.php' => config_path('contact.php'),
-        // ]);
+        
+        if(config('shopping_cart.storage') == DBStorage::class){
+            $this->loadMigrationsFrom(__DIR__ . '/migrations');
+        }
     }
     /**
      * Register the application services.
@@ -29,10 +26,11 @@ class LaravelCartServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->make('Ricadesign\LaravelCart\CartController');
-        // $this->mergeConfigFrom(
-        //      __DIR__.'/config/contact.php', 'contact'
-        //  );
+        $this->app->make(CartController::class);
+
+        if(config('shopping_cart.storage') == DBStorage::class){
+            $this->app->make(DBStorage::class);
+        }
     }
 }
 
