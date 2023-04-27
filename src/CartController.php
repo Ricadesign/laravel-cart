@@ -8,9 +8,9 @@ use Darryldecode\Cart\Facades\CartFacade as Cart;
 
 class CartController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return Cart::getContent();
+        return Cart::session($request->session()->getId())->getContent();
     }
 
     public function store(Request $request)
@@ -19,18 +19,19 @@ class CartController extends Controller
         $request->validate([
             'id' => 'required'
         ]);
-        Cart::add([
+        Cart::session($request->session()->getId())->add([
             'id' => $request->id,
             'name' => $request->name,
             'price' => $request->price,
             'quantity' => $request->quantity,
             'attributes' => $request->input('attributes')
         ]);
+
         return 'Ok';
     }
     public function update(Request $request)
     {
-        Cart::update($request->id,[
+        Cart::session($request->session()->getId())->update($request->id,[
             'quantity' => [
                 'relative' => false,
                 'value' => $request->quantity
@@ -41,7 +42,7 @@ class CartController extends Controller
 
     public function increment(Request $request)
     {
-        Cart::update($request->id,[
+        Cart::session($request->session()->getId())->update($request->id,[
             'quantity' => [
                 'relative' => true,
                 'value' => $request->quantity
@@ -52,7 +53,7 @@ class CartController extends Controller
 
     public function remove(Request $request)
     {
-        Cart::remove([
+        Cart::session($request->session()->getId())->remove([
             'id' => $request->id
         ]);
         return 'Ok';
