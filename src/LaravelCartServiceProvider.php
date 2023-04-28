@@ -33,7 +33,7 @@ class LaravelCartServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->make(CartController::class);
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'laravel-cart');
+        $this->mergeConfigFrom(__DIR__.'/config/config.php', 'laravel-cart');
 
         if(config('shopping_cart.storage') == DBStorage::class){
             $this->app->make(DBStorage::class);
