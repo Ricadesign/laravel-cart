@@ -14,6 +14,12 @@ class LaravelCartServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadRoutesFrom(__DIR__.'/routes.php');
+
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/config/config.php' => config_path('laravel-cart.php'),
+            ], 'config');
+        };
         
         if(config('shopping_cart.storage') == DBStorage::class){
             $this->loadMigrationsFrom(__DIR__ . '/migrations');
