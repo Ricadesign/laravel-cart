@@ -10,10 +10,11 @@ You can install this package using Composer. Run the following command in your t
 composer require ricadesign/laravel-cart
 ```
 
-You can publish the package configuration (useful if you plan to have full control), run the following command:
+You can publish the package configurations (useful if you plan to have full control), run the following command:
 
 ```
 php artisan vendor:publish --provider="Darryldecode\Cart\CartServiceProvider\LaravelCart\CartServiceProvider" --tag="config"
+php artisan vendor:publish --provider="Ricadesign\LaravelCart\LaravelCartServiceProvider" --tag="config"
 ```
 
 ## Configuration
@@ -22,6 +23,26 @@ By default, the cart is stored in the user's session. However, if you want to ch
 
 ```php
 'storage' => 'Ricadesign\LaravelCart\DBStorage',
+```
+
+After configure storage, you must run: 
+
+```
+php artisan migrate
+```
+
+In case you are using DBStorage, you can configure the number of days you want to remain the cart on database in `config/laravel-cart.php` configuration file:
+
+```php
+'prunable_days' => 14,
+```
+
+In order to clear periodically the database_carts table you can include this line in schedule:
+
+```php
+$schedule->command('model:prune', [
+            '--model' => [DatabaseStorageModel::class],
+        ])->daily();
 ```
 
 ## Endpoints
