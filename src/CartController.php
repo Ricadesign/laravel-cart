@@ -10,7 +10,7 @@ class CartController extends Controller
 {
     public function index(Request $request)
     {
-        return Cart::session($request->session()->getId())->getContent();
+        return Cart::session($request->session()->token())->getContent();
     }
 
     public function store(Request $request)
@@ -19,7 +19,7 @@ class CartController extends Controller
         $request->validate([
             'id' => 'required'
         ]);
-        Cart::session($request->session()->getId())->add([
+        Cart::session($request->session()->token())->add([
             'id' => $request->id,
             'name' => $request->name,
             'price' => $request->price,
@@ -31,7 +31,7 @@ class CartController extends Controller
     }
     public function update(Request $request)
     {
-        Cart::session($request->session()->getId())->update($request->id,[
+        Cart::session($request->session()->token())->update($request->id,[
             'quantity' => [
                 'relative' => false,
                 'value' => $request->quantity
@@ -42,7 +42,7 @@ class CartController extends Controller
 
     public function increment(Request $request)
     {
-        Cart::session($request->session()->getId())->update($request->id,[
+        Cart::session($request->session()->token())->update($request->id,[
             'quantity' => [
                 'relative' => true,
                 'value' => $request->quantity
@@ -53,7 +53,7 @@ class CartController extends Controller
 
     public function remove(Request $request)
     {
-        Cart::session($request->session()->getId())->remove([
+        Cart::session($request->session()->token())->remove([
             'id' => $request->id
         ]);
         return 'Ok';
